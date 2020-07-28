@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jc.fire.dao.UserMapper">
+    <resultMap id="BaseResultMap" type="com.jc.fire.model.User">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="user_id" jdbcType="BIGINT" property="userId"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+        <result column="user_type" jdbcType="INTEGER" property="userType"/>
+        <result column="org_id" jdbcType="BIGINT" property="orgId"/>
+        <result column="state_date" jdbcType="TIMESTAMP" property="stateDate"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+    </resultMap>
+
+
+    <insert id="saveUser" useGeneratedKeys="true" keyProperty="userId">
+<![CDATA[
+        insert into USER (USER_ID, USER_NAME, ORG_ID, STATE_DATE, USER_TYPE, PHONE, PASSWORD)
+        values (#{userName}, #{orgId}, #{stateDate}, #{userType}, #{phone}, #{password})
+        ]]>
+</insert>
+
+    <select id="queryUserByCondition" resultMap="BaseResultMap">
+        SELECT t.USER_NAME, t.USER_ID, t.USER_TYPE, t.ORG_ID, t.PHONE, t.STATE_DATE, t.PASSWORD
+        FROM USER t
+        <if test="userId != null ">
+            and t.USER_ID = #{userId}
+        </if>
+        <if test="userType != null ">
+            and t.USER_TYPE = #{userType}
+        </if>
+        <if test="userName != null ">
+            and t.USER_ID = #{userName}
+        </if>
+        <if test="userId != null ">
+            and t.USER_ID = #{userId}
+        </if>
+    </select>
+</mapper>
