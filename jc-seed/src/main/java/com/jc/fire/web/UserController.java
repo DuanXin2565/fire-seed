@@ -21,9 +21,15 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 
 /**
-* Created by CodeGenerator on 2020/07/27.
-*/
-@RestController
+ * <Description> <br>
+ * 用户接口
+ * @author duan.xin<br>
+ * @version 1.0<br>
+ * @taskId <br>
+ * @Date 2019/10/21 14:19
+ * @see com.jc.fire.web <br>
+ * @since V8.1<br>
+ */@RestController
 @RequestMapping("/user")
 public class UserController {
     @Resource
