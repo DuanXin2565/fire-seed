@@ -1,1 +1,1 @@
-参考Spring Boot API Project Seed项目，整合swagger2，简单配置的一个基础的restful框架
+参考Spring Boot API Project Seed项目，整合swagger2，简单配置的一个基础的restful框架 
