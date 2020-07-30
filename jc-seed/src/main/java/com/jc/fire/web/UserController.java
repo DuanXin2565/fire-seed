@@ -45,10 +45,10 @@ public class UserController {
     }
 
     @ApiOperation(value = "删除用户", notes = "根据UserId删除用户")
-    @ApiImplicitParam(name = "user", value = "userId", required = true, dataType = "String")
+    @ApiImplicitParam(name = "userId", value = "userId", required = true, dataType = "String")
     @PostMapping("/delete")
-    public Result delete(@RequestParam String id) {
-        userService.deleteUserById(id);
+    public Result delete(@RequestParam String userId) {
+        userService.deleteUserById(userId);
         return ResultGenerator.genSuccessResult();
     }
 
