@@ -72,7 +72,7 @@ public class UserController {
      * @param: map
      */
     @ApiOperation(value = "查询用户", notes = "根据条件查询用户数据")
-    @ApiImplicitParam(name = "userRequestDto", value = "查询条件", dataType = "User")
+    @ApiImplicitParam(name = "userRequestDto", value = "查询条件", dataType = "UserRequestDto")
     @PostMapping("/query")
     public List<User> queryUserByCondition(@RequestBody UserRequestDto userRequestDto) {
         int page = userRequestDto.getPageNum();
