@@ -1,13 +1,14 @@
 package com.jc.fire.core;
 
 
-import org.apache.ibatis.exceptions.TooManyResultsException;
-import org.springframework.beans.factory.annotation.Autowired;
-import tk.mybatis.mapper.entity.Condition;
-
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
+
+import org.apache.ibatis.exceptions.TooManyResultsException;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import tk.mybatis.mapper.entity.Condition;
 
 /**
  * 基于通用MyBatis Mapper插件的Service接口的实现
@@ -56,7 +57,8 @@ public abstract class AbstractService<T> implements Service<T> {
             field.setAccessible(true);
             field.set(model, value);
             return mapper.selectOne(model);
-        } catch (ReflectiveOperationException e) {
+        }
+        catch (ReflectiveOperationException e) {
             throw new ServiceException(e.getMessage(), e);
         }
     }
