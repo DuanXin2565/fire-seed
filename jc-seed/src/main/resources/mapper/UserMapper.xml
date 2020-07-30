@@ -25,6 +25,7 @@
     <select id="queryUserByCondition" resultMap="BaseResultMap">
         SELECT t.USER_NAME, t.USER_ID, t.USER_TYPE, t.ORG_ID, t.PHONE, t.STATE_DATE, t.PASSWORD
         FROM USER t
+        where 1 = 1
         <if test="userId != null ">
             and t.USER_ID = #{userId}
         </if>
@@ -32,10 +33,26 @@
             and t.USER_TYPE = #{userType}
         </if>
         <if test="userName != null ">
-            and t.USER_ID = #{userName}
+            and t.USER_NAME = #{userName}
         </if>
-        <if test="userId != null ">
-            and t.USER_ID = #{userId}
+        <if test="orgId != null ">
+            and t.ORG_ID = #{orgId}
         </if>
     </select>
+
+    <delete id="deleteUserById">
+        delete from USER t where t.USER_ID = #{userId}
+    </delete>
+
+    <update id="updateUserById">
+        update USER set
+                  ORG_ID = #{orgId}
+                , USER_NAME = #{userName}
+                , USER_TYPE = #{userType}
+                , STATE_DATE = #{stateDate}
+                , PHONE = #{phone}
+                , PASSWORD = #{password}
+        where USER_ID = #{userId}
+    </update>
+
 </mapper>

@@ -3,6 +3,7 @@ import java.util.List;
 
 import com.jc.fire.model.User;
 import com.jc.fire.core.Service;
+import com.jc.fire.model.request.UserRequestDto;
 
 
 /**
@@ -29,5 +30,24 @@ public interface UserService extends Service<User> {
      * @return java.util.List<User>
      * @throws
      */
-    List<User> queryUserByCondition(User user);
+    List<User> queryUserByCondition(UserRequestDto user);
+
+    /**
+     * @Description: 更新用户
+     * @author duan.xin
+     * @param
+     * @return
+     * @throws
+     */
+    void updateUserById(User user);
+
+
+    /**
+     * @Description: 删除用户
+     * @author duan.xin
+     * @param
+     * @return
+     * @throws
+     */
+    void deleteUserById(String userId);
 }

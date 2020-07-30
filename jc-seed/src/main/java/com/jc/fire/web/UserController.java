@@ -1,7 +1,6 @@
 package com.jc.fire.web;
 
 import java.util.List;
-import java.util.Map;
 import javax.annotation.Resource;
 
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +14,7 @@ import com.github.pagehelper.PageInfo;
 import com.jc.fire.core.Result;
 import com.jc.fire.core.ResultGenerator;
 import com.jc.fire.model.User;
+import com.jc.fire.model.request.UserRequestDto;
 import com.jc.fire.service.UserService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -67,23 +67,18 @@ public class UserController {
      * @param
      * @return java.util.List<com.jc.fire.model.User>
      * @throws
-     * @Description: 查询数据
+     * @Description: 查询数据 目前新增了一个requestDto,后续看具体情况进行优化
      * @author duan.xin
      * @param: map
      */
-    @ApiOperation(value = "查询用户", notes = "根据UserId修改用户数据")
-    @ApiImplicitParam(name = "map", value = "查询条件")
+    @ApiOperation(value = "查询用户", notes = "根据条件查询用户数据")
+    @ApiImplicitParam(name = "userRequestDto", value = "查询条件", dataType = "User")
     @PostMapping("/query")
-    public List<User> queryUserByCondition(@RequestBody Map<String, String> map) {
-        if (map.isEmpty()) {
-            return null;
-        }
-        int page = Integer.parseInt(map.get("page"));
-        int size = Integer.parseInt(map.get("size"));
+    public List<User> queryUserByCondition(@RequestBody UserRequestDto userRequestDto) {
+        int page = userRequestDto.getPageNum();
+        int size = userRequestDto.getPageSize();
         PageHelper.startPage(page, size);
-        User user = new User();
-        user.setUserId(Long.getLong(map.get("userId")));
-        List<User> list = userService.queryUserByCondition(user);
+        List<User> list = userService.queryUserByCondition(userRequestDto);
         PageInfo pageInfo = new PageInfo(list);
 //        return ResultGenerator.genSuccessResult(pageInfo);
         return list;
