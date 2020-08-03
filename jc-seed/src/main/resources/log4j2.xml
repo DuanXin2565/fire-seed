@@ -10,8 +10,8 @@
         <!-- %logger{36} 表示 Logger 名字最长36个字符 -->
         <property name="LOG_PATTERN" value="%date{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n" />
         <!-- 定义日志存储的路径 目前只写名字的话自动生成在项目路径下 -->
-        <property name="FILE_PATH" value="log" />
-        <property name="FILE_NAME" value="log" />
+        <property name="FILE_PATH" value="logs" />
+        <property name="FILE_NAME" value="logs" />
     </Properties>
 
     <appenders>
@@ -70,6 +70,17 @@
             <DefaultRolloverStrategy max="15"/>
         </RollingFile>
 
+        <RollingFile name="sql_appender" fileName="${FILE_PATH}/log-sql.log" filePattern="${FILE_PATH}/%d{yyyy-MM-dd}/log_sql_%i.log.gz">
+            <Filters>
+                <ThresholdFilter level="debug"/>
+            </Filters>
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %l - %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="200 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="3"/>
+        </RollingFile>
     </appenders>
 
     <!--Logger节点用来单独指定日志的形式，比如要为指定包下的class指定不同的日志级别等。-->
@@ -85,6 +96,17 @@
         <Logger name="org.springframework" level="info" additivity="false">
             <AppenderRef ref="Console"/>
         </Logger>
+        <!--监控sql信息-->
+        <Logger name="com.jc.fire.dao" level="DEBUG" additivity="false">
+            <appender-ref ref="sql_appender" />
+            <appender-ref ref="Console"/>
+        </Logger>
+
+        <!--配置输出sql语句-->
+        <logger name="org.apache.ibatis" level="DEBUG"/>
+        <logger name="java.sql.Connection" level="DEBUG"/>
+        <logger name="java.sql.Statement" level="DEBUG"/>
+        <logger name="java.sql.PreparedStatement" level="DEBUG"/>
 
         <root level="info">
             <appender-ref ref="Console"/>
