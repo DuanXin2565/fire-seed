@@ -6,19 +6,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.alibaba.fastjson.support.config.FastJsonConfig;
-import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
-
-import com.jc.fire.core.Result;
-import com.jc.fire.core.ResultCode;
-import com.jc.fire.core.ServiceException;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -37,6 +27,14 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.alibaba.fastjson.support.config.FastJsonConfig;
+import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
+import com.jc.fire.core.Result;
+import com.jc.fire.core.ResultCode;
+import com.jc.fire.core.ServiceException;
 
 /**
  * Spring MVC 配置
@@ -69,6 +67,7 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
     //配一下swagger
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        logger.info("整合swagger");
         registry.addResourceHandler("/**").addResourceLocations(
                 "classpath:/static/");
         registry.addResourceHandler("swagger-ui.html").addResourceLocations(
@@ -195,8 +194,8 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
         String secret = "Potato";
         //混合密钥md5
         String sign = DigestUtils.md5Hex(linkString + secret);
-
-        return StringUtils.equals(sign, requestSign);//比较
+        //比较
+        return StringUtils.equals(sign, requestSign);
     }
 
     private String getIpAddress(HttpServletRequest request) {
