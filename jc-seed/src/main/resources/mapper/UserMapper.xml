@@ -19,7 +19,7 @@
 
     <insert id="saveUser" useGeneratedKeys="true" keyProperty="userId">
 <![CDATA[
-        insert into USER (USER_ID, USER_NAME, ORG_ID, STATE_DATE, USER_TYPE, PHONE, PASSWORD)
+        insert into USER (USER_NAME, ORG_ID, STATE_DATE, USER_TYPE, PHONE, PASSWORD)
         values (#{userName}, #{orgId}, #{stateDate}, #{userType}, #{phone}, #{password})
         ]]>
 </insert>
