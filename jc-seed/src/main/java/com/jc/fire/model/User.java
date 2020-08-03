@@ -52,6 +52,35 @@ public class User implements Serializable {
     private String phone;
 
     /**
+     * 状态
+     */
+    private String status;
+
+    /**
+     * 角色
+     */
+    private String role;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+
+
+
+    /**
      * 获取用户ID
      *
      * @return user_id - 用户ID

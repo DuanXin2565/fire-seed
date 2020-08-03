@@ -71,6 +71,16 @@ public class UserRequestDto implements Serializable {
     private  int pageSize;
 
     /**
+     * 状态
+     */
+    private String status;
+
+    /**
+     * 角色
+     */
+    private String role;
+
+    /**
      * 获取用户ID
      *
      * @return user_id - 用户ID
@@ -210,5 +220,21 @@ public class UserRequestDto implements Serializable {
 
     public void setPageNum(int pageNum) {
         this.pageNum = pageNum;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }
