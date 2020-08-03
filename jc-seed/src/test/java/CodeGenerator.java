@@ -23,11 +23,12 @@ import static com.jc.fire.core.ProjectConstant.SERVICE_PACKAGE;
  * 代码生成器，根据数据表名称生成对应的Model、Mapper、Service、Controller简化开发。
  */
 public class CodeGenerator {
-    //JDBC配置，请修改为你项目的实际配置
-    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/hydranttest";
+    //JDBC配置，请修改为你项目的实际配置--高版本mysql需要有时区限制
+    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/hydranttest?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai";
     private static final String JDBC_USERNAME = "root";
     private static final String JDBC_PASSWORD = "password";
-    private static final String JDBC_DIVER_CLASS_NAME = "com.mysql.jdbc.Driver";
+    //低版本使用该driver"com.mysql.jdbc.Driver";
+    private static final String JDBC_DIVER_CLASS_NAME = "com.mysql.cj.jdbc.Driver";
 
     private static final String PROJECT_PATH = System.getProperty("user.dir");//项目在硬盘上的基础路径
     private static final String TEMPLATE_FILE_PATH = PROJECT_PATH + "/src/test/resources/generator/template";//模板位置
@@ -43,7 +44,7 @@ public class CodeGenerator {
     private static final String DATE = new SimpleDateFormat("yyyy/MM/dd").format(new Date());//@date
 
     public static void main(String[] args) {
-        genCode("user");
+        genCode("organization");
         //genCodeByCustomModelName("输入表名","输入自定义Model名称");
     }
 

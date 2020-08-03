@@ -1,13 +1,21 @@
 package com.jc.fire.service;
+
 import java.util.List;
 
-import com.jc.fire.model.User;
 import com.jc.fire.core.Service;
+import com.jc.fire.model.User;
 import com.jc.fire.model.request.UserRequestDto;
 
 
 /**
- * Created by CodeGenerator on 2020/07/27.
+ * <Description> <br>
+ *
+ * @author duan.xin<br>
+ * @version 1.0<br>
+ * @taskId <br>
+ * @Date 2020/7/30 9:37
+ * @see com.jc.fire.service <br>
+ * @since V8.1<br>
  */
 public interface UserService extends Service<User> {
 

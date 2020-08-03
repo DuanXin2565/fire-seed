@@ -35,7 +35,7 @@
             and t.USER_TYPE = #{userType}
         </if>
         <if test="userName != null ">
-            and t.USER_NAME = #{userName}
+            and t.USER_NAME = like concat(concat('%', #{userName}), '%')
         </if>
         <if test="orgId != null ">
             and t.ORG_ID = #{orgId}
