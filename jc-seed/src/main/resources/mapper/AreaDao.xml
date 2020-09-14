@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jc.fire.dao.AreaDao">
+    <resultMap id="BaseResultMap" type="com.jc.fire.model.Area">
+        <id column="area_id" jdbcType="BIGINT" property="areaId"/>
+        <result column="area_name" jdbcType="VARCHAR" property="areaName"/>
+        <result column="parent_id" jdbcType="BIGINT" property="parentId"/>
+        <result column="area_type" jdbcType="CHAR" property="areaType"/>
+        <result column="user_id" jdbcType="BIGINT" property="userId"/>
+        <result column="state_date" jdbcType="TIMESTAMP" property="stateDate"/>
+        <result column="is_delete" jdbcType="BOOLEAN" property="isDelete"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        area_id
+        ,
+        area_name,
+        parent_id,
+        area_type,
+        user_id,
+        state_date,
+        is_delete
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from area
+        where area_id = #{areaId,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete
+        from area
+        where area_id = #{areaId,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.jc.fire.model.Area">
+        insert into area (area_id, area_name, parent_id, area_type,
+                          user_id, state_date, is_delete)
+        values (#{areaId}, #{areaName,jdbcType=VARCHAR}, #{parentId,jdbcType=BIGINT}, #{areaType,jdbcType=CHAR},
+                #{userId,jdbcType=BIGINT}, #{stateDate,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=BOOLEAN})
+    </insert>
+    <insert id="insertSelective" keyColumn="area_id" keyProperty="areaId" parameterType="com.jc.fire.model.Area"
+            useGeneratedKeys="true">
+        insert into area
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="areaName != null">
+                area_name,
+            </if>
+            <if test="parentId != null">
+                parent_id,
+            </if>
+            <if test="areaType != null">
+                area_type,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="stateDate != null">
+                state_date,
+            </if>
+            <if test="isDelete != null">
+                is_delete,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="areaName != null">
+                #{areaName,jdbcType=VARCHAR},
+            </if>
+            <if test="parentId != null">
+                #{parentId,jdbcType=BIGINT},
+            </if>
+            <if test="areaType != null">
+                #{areaType,jdbcType=CHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="stateDate != null">
+                #{stateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isDelete != null">
+                #{isDelete,jdbcType=BOOLEAN},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.jc.fire.model.Area">
+        update area
+        <set>
+            <if test="areaName != null">
+                area_name = #{areaName,jdbcType=VARCHAR},
+            </if>
+            <if test="parentId != null">
+                parent_id = #{parentId,jdbcType=BIGINT},
+            </if>
+            <if test="areaType != null">
+                area_type = #{areaType,jdbcType=CHAR},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="stateDate != null">
+                state_date = #{stateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isDelete != null">
+                is_delete = #{isDelete,jdbcType=BOOLEAN},
+            </if>
+        </set>
+        where area_id = #{areaId,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.jc.fire.model.Area">
+        update area
+        set area_name  = #{areaName,jdbcType=VARCHAR},
+            parent_id  = #{parentId,jdbcType=BIGINT},
+            area_type  = #{areaType,jdbcType=CHAR},
+            user_id    = #{userId,jdbcType=BIGINT},
+            state_date = #{stateDate,jdbcType=TIMESTAMP},
+            is_delete  = #{isDelete,jdbcType=BOOLEAN}
+        where area_id = #{areaId,jdbcType=BIGINT}
+    </update>
+    <insert id="batchInsert">
+        insert into area (area_id, area_name, parent_id, area_type,
+        user_id, state_date, is_delete
+        )
+        values
+        <foreach collection="list" item="area" index="index" separator=",">
+            (#{area.areaId},
+             #{area.areaName,jdbcType=VARCHAR},
+             #{area.parentId,jdbcType=BIGINT},
+             #{area.areaType,jdbcType=CHAR},
+             #{area.userId,jdbcType=BIGINT},
+             #{area.stateDate,jdbcType=TIMESTAMP},
+             #{area.isDelete,jdbcType=BOOLEAN}
+            )
+        </foreach>
+
+    </insert>
+
+</mapper>

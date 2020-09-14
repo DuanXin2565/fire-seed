@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jc.fire.dao.AreasDao">
+  <resultMap id="BaseResultMap" type="com.jc.fire.model.Areas">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="parent_id" jdbcType="BIGINT" property="parentId" />
+    <result column="level" jdbcType="TINYINT" property="level" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="full_name" jdbcType="VARCHAR" property="fullName" />
+    <result column="short_name" jdbcType="VARCHAR" property="shortName" />
+    <result column="province_id" jdbcType="BIGINT" property="provinceId" />
+    <result column="city_id" jdbcType="BIGINT" property="cityId" />
+    <result column="country_id" jdbcType="BIGINT" property="countryId" />
+    <result column="street_id" jdbcType="BIGINT" property="streetId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, parent_id, `level`, `name`, full_name, short_name, province_id, city_id, country_id, 
+    street_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from areas
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from areas
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.jc.fire.model.Areas" useGeneratedKeys="true">
+    insert into areas (parent_id, `level`, `name`, 
+      full_name, short_name, province_id, 
+      city_id, country_id, street_id
+      )
+    values (#{parentId,jdbcType=BIGINT}, #{level,jdbcType=TINYINT}, #{name,jdbcType=VARCHAR}, 
+      #{fullName,jdbcType=VARCHAR}, #{shortName,jdbcType=VARCHAR}, #{provinceId,jdbcType=BIGINT}, 
+      #{cityId,jdbcType=BIGINT}, #{countryId,jdbcType=BIGINT}, #{streetId,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.jc.fire.model.Areas" useGeneratedKeys="true">
+    insert into areas
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="parentId != null">
+        parent_id,
+      </if>
+      <if test="level != null">
+        `level`,
+      </if>
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="fullName != null">
+        full_name,
+      </if>
+      <if test="shortName != null">
+        short_name,
+      </if>
+      <if test="provinceId != null">
+        province_id,
+      </if>
+      <if test="cityId != null">
+        city_id,
+      </if>
+      <if test="countryId != null">
+        country_id,
+      </if>
+      <if test="streetId != null">
+        street_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="parentId != null">
+        #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="level != null">
+        #{level,jdbcType=TINYINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="fullName != null">
+        #{fullName,jdbcType=VARCHAR},
+      </if>
+      <if test="shortName != null">
+        #{shortName,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceId != null">
+        #{provinceId,jdbcType=BIGINT},
+      </if>
+      <if test="cityId != null">
+        #{cityId,jdbcType=BIGINT},
+      </if>
+      <if test="countryId != null">
+        #{countryId,jdbcType=BIGINT},
+      </if>
+      <if test="streetId != null">
+        #{streetId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jc.fire.model.Areas">
+    update areas
+    <set>
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="level != null">
+        `level` = #{level,jdbcType=TINYINT},
+      </if>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="fullName != null">
+        full_name = #{fullName,jdbcType=VARCHAR},
+      </if>
+      <if test="shortName != null">
+        short_name = #{shortName,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceId != null">
+        province_id = #{provinceId,jdbcType=BIGINT},
+      </if>
+      <if test="cityId != null">
+        city_id = #{cityId,jdbcType=BIGINT},
+      </if>
+      <if test="countryId != null">
+        country_id = #{countryId,jdbcType=BIGINT},
+      </if>
+      <if test="streetId != null">
+        street_id = #{streetId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jc.fire.model.Areas">
+    update areas
+    set parent_id = #{parentId,jdbcType=BIGINT},
+      `level` = #{level,jdbcType=TINYINT},
+      `name` = #{name,jdbcType=VARCHAR},
+      full_name = #{fullName,jdbcType=VARCHAR},
+      short_name = #{shortName,jdbcType=VARCHAR},
+      province_id = #{provinceId,jdbcType=BIGINT},
+      city_id = #{cityId,jdbcType=BIGINT},
+      country_id = #{countryId,jdbcType=BIGINT},
+      street_id = #{streetId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectAreas" resultType="com.jc.fire.model.Areas">
+    select
+    <include refid="Base_Column_List" />
+    from areas
+    <if test="pageNum != null and pageSize != null">
+      limit #{start}, #{pageSize}
+    </if>
+  </select>
+</mapper>
