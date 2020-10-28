@@ -50,6 +50,8 @@ public class MqttSenderConfig {
         mqttConnectOptions.setPassword(password.toCharArray());
         mqttConnectOptions.setServerURIs(new String[]{hostUrl});
         mqttConnectOptions.setKeepAliveInterval(2);
+        //这里限制一下这个发布数
+        mqttConnectOptions.setMaxInflight(10);
         return mqttConnectOptions;
     }
 
@@ -65,6 +67,7 @@ public class MqttSenderConfig {
     public MessageHandler mqttOutbound() {
         MqttPahoMessageHandler messageHandler = new MqttPahoMessageHandler(clientId, mqttClientFactory());
         messageHandler.setAsync(true);
+        messageHandler.setDefaultQos(0);
         messageHandler.setDefaultTopic(defaultTopic);
         return messageHandler;
     }

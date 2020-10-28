@@ -1,16 +1,23 @@
 package com.jc.fire.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.alibaba.fastjson.JSONObject;
 import com.jc.fire.service.MqttGateway;
+import com.jc.fire.websocket.WebSocketServer;
 
 /**
  * <Description> <br>
  * mqtt触发消息发布
+ *
  * @author duan.xin<br>
  * @version 1.0<br>
  * @taskId <br>
@@ -28,6 +35,7 @@ public class MqttController {
     /**
      * hello 为发布消息的主题，也可设置为传参；或者通过类似
      * com.jc.fire.mqttsp.JowoiotMqttClient 类设置为循环自动发送
+     *
      * @param sendData
      * @return
      */
@@ -37,4 +45,6 @@ public class MqttController {
         return "OK";
 
     }
+
+
 }

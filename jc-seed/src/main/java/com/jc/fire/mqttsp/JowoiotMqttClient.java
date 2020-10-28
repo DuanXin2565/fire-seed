@@ -58,7 +58,8 @@ public class JowoiotMqttClient {
             mqttClient.subscribe("hello");
             mqttClient.setCallback(new MqttCallback() {
                 @Override
-                public void connectionLost(Throwable throwable) {
+                public void connectionLost(Throwable throwable)
+                {
                     System.out.println("connectionLost");
                 }
 
@@ -107,7 +108,7 @@ public class JowoiotMqttClient {
             try {
                 TimeUnit.SECONDS.sleep(2);
                 //发送数据
-                System.out.println("poll.toString().getBytes(): ");
+                System.out.println("poll.toString().getBytes(): " + poll.toString());
                 // 打印需要发送的数据
                 if (poll != null) {
                     mqttClient.publish("jowoiot/toServer/bruce/lptestpub", poll.toString().getBytes(), qos, retained);

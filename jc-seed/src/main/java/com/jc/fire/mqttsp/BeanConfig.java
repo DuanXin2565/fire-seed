@@ -64,6 +64,7 @@ public class BeanConfig {
 
     @Bean
     public MqttClient mqttClient() throws MqttException {
+        //mqtt MemoryPersistence会使得clientId保存到内存当中
         return new MqttClient(hostUrl, "UPS_" + UUID.randomUUID().toString(), new MemoryPersistence());
 
     }
